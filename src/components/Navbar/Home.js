@@ -16,7 +16,7 @@ function Home() {
             <p>✔️ 24/7 Customer Service</p>
           </div>
           <div>
-            This great deal starts from just 
+            This great deal starts from just. Try this quickly.
           </div>
           <div>
             &#8377; <span className='text-3xl text-indigo-800'>149 </span>/mo <span className='text-green-900'>+2 Free Months</span><br/>
