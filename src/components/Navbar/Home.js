@@ -1,8 +1,9 @@
 import React from 'react'
-// import { useEffect,useState } from 'react'
+
 function Home() { 
 
   return (
+    <>
     <div className='pt-[60px] md:h-[100vh] bg-indigo-100'>
       <div className={`flex md:flex-row flex-col justify-center p-6 `}>
         <div className='m-[20px]'>
@@ -25,12 +26,56 @@ function Home() {
         </div>
         <div className='md:m-[3rem]'>
           <img 
-          src='	https://www.hostinger.in/_ipx/f_webp&q_80/h-assets/images/pages/homepage-uplift/header-image-2x.png' 
+          src = '/images/header.png'
           alt='' 
           className='md:h-[25rem]'/>
         </div>
       </div>
     </div>
+    <div className='h-[100vh] md:p-[30px]'>
+      <div className='flex md:flex-row flex-col m-[50px] justify-center'>
+        <div>
+          <img
+          src='/images/customer.png'
+          alt=''
+          className='md:h-[25rem]'/>
+        </div>
+        <div className='p-4 flex flex-col justify-center md:ml-[35px]'>
+          <div>
+            <p className='m-2'>So, What you will get ?</p>
+            <p className='text-indigo-500 text-2xl'>We Offer <span className='text-violet-800'>24/7</span> best customer service</p>
+          </div>
+            <div className='pt-4 text-indigo-950'>
+              <p className='pt-3'>✔️ Our team is here to guide you all the way through develoment of your Website.</p>
+              <p className='pt-3'>✔️ Expertise will consult you 1 on 1.</p>
+              <p className='pt-3'>✔️ Moreover, you will become the webmaster by refering our best video guides.</p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div className='h-[100vh] bg-indigo-200 md:p-[30px]'>
+    <div className='flex md:flex-row flex-col m-[50px] justify-center'>        
+        <div className='p-4 flex flex-col justify-center md:ml-[35px]'>
+          <div>
+            <p className='m-2'>Only this? Wait my friend.</p>
+            <p className='text-indigo-500 text-2xl'>We Offer <span className='text-violet-800'>24/7</span> best customer service</p>
+          </div>
+            <div className='pt-4 text-indigo-950 mr-20'>
+              <p className='pt-3'>✔️ Transfer your website with our mighty migration tool</p>
+              <p className='pt-3'>✔️ Expertise will guide you 1 on 1 and 24/7.</p>
+              <p className='pt-3'>✔️ Lastly, your website will be tranfered within 12 hrours.</p>
+            </div>
+        </div>
+        <div>
+          <img
+          src='/images/migration.png'
+          alt=''
+          className='md:h-[25rem]'/>
+        </div>
+      </div>
+    </div>
+    </>
+    
   )
 }
 
