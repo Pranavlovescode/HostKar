@@ -27,7 +27,7 @@ function LoginPage() {
   };
   return (
     <>
-      <div className="pt-[5rem] text-center bg-indigo-100">
+      <div className="pt-[5rem] text-center bg-indigo-100 h-[100vh] w-[100%]">
         <p className=" md:text-[30px] text-[20px] md:m-10">
           Welcome to the Login Page
         </p>
