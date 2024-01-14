@@ -2,9 +2,13 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const signup = require("./routes/auth")
+const cookie = require('cookie-parser')
+
 
 const app = express();
+app.use(cookie())
 app.use(express.json());
+
 
 
 //Routes

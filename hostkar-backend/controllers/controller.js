@@ -1,4 +1,5 @@
 const Login = require("../models/signup");
+const jwt = require("jsonwebtoken");
 
 const handelError = (err) => {
   console.log(err.message, err.code);
@@ -14,17 +15,28 @@ const handelError = (err) => {
   }
   return error;
 };
+
+const handleToken = (id) => {
+  return jwt.sign({ id }, "HostKar website secret");
+};
+
+
+
+
+
 const handleSignup = async (req, res) => {
   try {
     const { name, email, pass } = req.body;
     const result = await Login.create({ name, email, pass });
-
+    const token = handleToken(result._id);
+    res.cookie("jwt", token);
     res.status(200).send(result);
     console.log(result);
   } catch (error) {
     const errors = handelError(error);
     res.status(400).json({ errors });
+    console.log(errors);
   }
 };
 
-module.exports = { handleSignup };
+module.exports = { handleSignup};
