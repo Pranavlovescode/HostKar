@@ -29,20 +29,6 @@ loginSchema.pre("save", async function (next) {
   next();
 });
 
-loginSchema.statics.login=async function(email,pass){ 
-  
-  if(!email || !pass){
-    throw Error('All fields must be filled')
-  }
-  const user = await this.findOne({email})
-  const match = await bcrypt.compare(pass,user.pass)
-  if(!user){
-    throw Error('Incorrect email')
-  }
-  if(!match){
-    throw Error('Incorrect password')
-  }
-  return user
-}
+
 
 module.exports = mongoose.model("login", loginSchema);

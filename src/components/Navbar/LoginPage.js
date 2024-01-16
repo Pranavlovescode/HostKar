@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 function LoginPage() {
   const [pass, setPass] = useState("");
   const [email, setEmail] = useState("");
-
+  const [token, setToken] = useState("");
   const [emailerr, setEmailErr] = useState("");
   const [passerr, setPassErr] = useState("");
 
@@ -11,15 +12,17 @@ function LoginPage() {
 
     const data = { email, pass };
     try {
-      const result = await fetch("/api/auth/login", {
+      const result = await fetch("/api/login", {
         method: "POST",
         body: JSON.stringify(data),
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },
       });
       const response = await result.json();
       console.log("response :", response);
+      setToken(response.token);
       if (result.ok) {
         alert("Login successful");
 
@@ -37,6 +40,16 @@ function LoginPage() {
     } catch (error) {
       alert("Something went wrong");
     }
+  };
+  const getCart = async () => {
+    const response = await fetch("/api/protected", {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    const data = await response.json();
+    console.log(data);
   };
   return (
     <>
@@ -86,6 +99,15 @@ function LoginPage() {
             >
               Submit
             </button>
+            <NavLink to={"/protected-route/cart"}>
+              <button
+                onClick={getCart}
+                type="submit"
+                className="bg-indigo-500 rounded-md p-1 pl-5 pr-5 text-white md:hover:bg-indigo-800 md:duration-700"
+              >
+                Go to Cart
+              </button>
+            </NavLink>
           </form>
         </div>
       </div>

@@ -7,6 +7,7 @@ import Home from './components/Navbar/Home';
 import Services from './components/Navbar/Testemonials';
 import LoginPage from './components/Navbar/LoginPage'
 import SignupPage from './components/Navbar/SignupPage';
+// import Cart from './components/Navbar/Cart';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/testemonials" element={<Services />} />
         <Route path="/login-page" element={<LoginPage />} />
         <Route path="/signup-page" element={<SignupPage />} />
+        {/* <Route path="/protected-route/cart" element={<Cart />} /> */}
       </Routes>
     </Router>
     </>
