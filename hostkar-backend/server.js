@@ -3,19 +3,19 @@ const express = require("express");
 const mongoose = require("mongoose");
 const signup = require("./routes/signup")
 const login = require('./routes/login')
-const cookie = require('cookie-parser');
-const { authenticateMiddleware } = require("./middleware/checkLogin");
-const cors = require('cors');
+const protected = require('./routes/protected')
+const cookie = require('cookie-parser')
 
+// Middlewares
 const app = express();
-app.use(cookie())
 app.use(express.json());
-app.use(authenticateMiddleware)
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' })); // Update with your frontend URL
+app.use(cookie())
 
 //Routes
 app.use("/api/auth", signup );
 app.use('/api/login',login)
+app.use('/api/protected',protected)
+app.use('/api/logout',login)
 
 // Test Routes
 app.get("/", (req, res) => {
@@ -23,10 +23,6 @@ app.get("/", (req, res) => {
 });
 app.post("/time", (req, res) => {
   res.send("Time");
-});
-app.get("/protected-route/cart", authenticateMiddleware, (req, res) => {
-  // Accessible only if the user is authenticated
-  res.json({ message: "Protected Route" ,user: req.user});
 });
 
 // Connection String

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-function LoginPage() {
+import { useNavigate } from "react-router-dom";
+
+function LoginPage({handleAuth}) {
+
   const [pass, setPass] = useState("");
   const [email, setEmail] = useState("");
-  const [token, setToken] = useState("");
+  const navigate = useNavigate()
   const [emailerr, setEmailErr] = useState("");
   const [passerr, setPassErr] = useState("");
+  
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -15,19 +18,20 @@ function LoginPage() {
       const result = await fetch("/api/login", {
         method: "POST",
         body: JSON.stringify(data),
-        credentials: 'include',
+        
         headers: {
           "Content-Type": "application/json",
         },
       });
       const response = await result.json();
       console.log("response :", response);
-      setToken(response.token);
+      
       if (result.ok) {
+        handleAuth()
         alert("Login successful");
-
         setEmail("");
         setPass("");
+        
       }
       if (response.errors) {
         setEmailErr(response.errors.email);
@@ -44,12 +48,12 @@ function LoginPage() {
   const getCart = async () => {
     const response = await fetch("/api/protected", {
       headers: {
-        Authorization: token,
+        credentials: 'include',
       },
     });
-
     const data = await response.json();
     console.log(data);
+    navigate('/protected-route/cart')
   };
   return (
     <>
@@ -99,15 +103,13 @@ function LoginPage() {
             >
               Submit
             </button>
-            <NavLink to={"/protected-route/cart"}>
-              <button
+            <button
                 onClick={getCart}
                 type="submit"
                 className="bg-indigo-500 rounded-md p-1 pl-5 pr-5 text-white md:hover:bg-indigo-800 md:duration-700"
               >
                 Go to Cart
               </button>
-            </NavLink>
           </form>
         </div>
       </div>
