@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import app from "../firebase";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+
+const auth = getAuth(app);
 
 function Navbar() {
   const [showNav, setshowNav] = useState(false);
   // const [token, setToken] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const [authenticated, setAuthenticated] = useState(null);
 
   useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthenticated(user);
+      } else {
+        setAuthenticated(null);
+      }
+    });
     // Close the navbar when the user navigates to a specific page
     const pagesToCloseNavbar = ["/deals", "/", "/testemonials"]; // Add the paths of pages where you want to close the navbar
 
@@ -36,7 +48,13 @@ function Navbar() {
   const openSignupPage = () => {
     navigate("/signup-page");
   };
-  
+
+  const logout=()=>{
+    signOut(auth)
+    alert('Logout Successfull')
+    navigate('/')
+  }
+
   return (
     <nav className="fixed w-full m-0 p-0 flex bg-indigo-300 z-50">
       {/* Navbar Content */}
@@ -99,20 +117,32 @@ function Navbar() {
 
       {/* Navbar buttons */}
       <div className="flex flex-row absolute right-10">
-        
-        <button
-          onClick={openLoginPage}
-          className="p-2 m-2 bg-indigo-500  rounded-full hover:bg-indigo-600 text-white"
-        >
-          Login
-        </button>
-        <button
-          onClick={openSignupPage}
-          className="p-2 m-2 bg-indigo-950 text-white border-indigo-400 rounded-full hover:bg-indigo-900"
-        >
-          Signup
-        </button>
-
+        {authenticated ? (
+          <>
+            
+            <button
+              onClick={logout}
+              className="p-2 m-2 bg-indigo-950 text-white border-indigo-400 rounded-full hover:bg-indigo-900"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={openLoginPage}
+              className="p-2 m-2 bg-indigo-500  rounded-full hover:bg-indigo-600 text-white"
+            >
+              Login
+            </button>
+            <button
+              onClick={openSignupPage}
+              className="p-2 m-2 bg-indigo-950 text-white border-indigo-400 rounded-full hover:bg-indigo-900"
+            >
+              Signup
+            </button>
+          </>
+        )}
         <div
           onClick={DisplayNavbar}
           className="flex items-center md:hidden hover:cursor-pointer m-[10px]"
