@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 const signup = getAuth(app);
 
 function SignupPage() {
@@ -12,6 +13,7 @@ function SignupPage() {
   const [pass, setPass] = useState("");
   const [email, setEmail] = useState("");
   const [err, setErr] = useState("");
+  const navigate = useNavigate()
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -40,6 +42,7 @@ function SignupPage() {
             setEmail("");
             setPass("");
             console.log(user);
+            navigate('/deals')
           }
         } catch (error) {
           alert("Something went wrong");
@@ -54,14 +57,15 @@ function SignupPage() {
   };
   return (
     <>
-      <div className="pt-[5rem] text-center bg-indigo-100 h-[100vh] w-[100%] ">
-        <p className=" md:text-[30px] text-[20px] md:m-10">
-          Welcome to the Login Page
+      <div className="flex justify-center justify-items-center flex-col pt-[5rem] text-center bg-indigo-100 h-[100vh] w-[100%]">
+        <div className=" bg-indigo-200 w-[90%] md:w-[40%] mx-auto py-8 rounded-lg shadow-xl flex justify-center justify-items-center flex-col">
+        <p className=" md:text-[30px] text-[20px] md:m-10 font-bold">
+          Welcome to the Signup Page
         </p>
         <div>
           <form onSubmit={submitForm}>
-            <div className="m-10 p-5">
-              <label name="name" className="m-4">
+          <div className="m-5 p-2">
+              <label name="email" className="m-2">
                 Name
               </label>
               <input
@@ -75,8 +79,8 @@ function SignupPage() {
               />
             </div>
             
-            <div className="m-10 p-5">
-              <label name="email" className="m-4">
+            <div className="m-5 p-2">
+              <label name="email" className="m-2">
                 Email ID
               </label>
               <input
@@ -90,8 +94,8 @@ function SignupPage() {
               />
             </div>
             
-            <div className="m-10 p-5 ">
-              <label name="pass" className="m-4">
+            <div className="m-5 p-2">
+              <label name="email" className="m-2">
                 Password
               </label>
               <input
@@ -111,6 +115,7 @@ function SignupPage() {
               Submit
             </button>
           </form>
+        </div>
         </div>
       </div>
     </>

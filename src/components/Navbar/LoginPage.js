@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from "../../firebase";
 
@@ -36,7 +36,7 @@ function LoginPage() {
             alert("Login successful");
             setEmail("");
             setPass("");
-            navigate("/protected-route/cart");
+            navigate("/");
           }
           
         } catch (error) {
@@ -56,14 +56,16 @@ function LoginPage() {
   
   return (
     <>
-      <div className="pt-[5rem] text-center bg-indigo-100 h-[100vh] w-[100%]">
-        <p className=" md:text-[30px] text-[20px] md:m-10">
+      <div className="flex justify-center justify-items-center flex-col pt-[5rem] text-center bg-indigo-100 h-[100vh] w-[100%]">
+        <div className=" bg-indigo-200 w-[90%] md:w-[40%] mx-auto py-8 rounded-lg shadow-xl flex justify-center justify-items-center flex-col">
+        <h1 className=" md:text-[30px] text-[23px] md:m-10 font-bold">
           Welcome to the Login Page
-        </p>
-        <div>
+        </h1>
+        <span className="pt-4"><span>Not registered yet? </span><NavLink className={'text-violet-600'} to={'/signup-page'}>Signup Here</NavLink></span>
+        <div> 
           <form>
-            <div className="m-10 p-5">
-              <label name="email" className="m-4">
+            <div className="m-5 p-2">
+              <label name="email" className="m-2">
                 Email ID
               </label>
               <input
@@ -77,10 +79,10 @@ function LoginPage() {
                 type="email"
                 required
               />
-              <div className="text-red-900">{err}</div>
+              
             </div>
-            <div className="m-10 p-5 ">
-              <label name="pass" className="m-4">
+            <div className="m-5 p-2">
+              <label name="pass" className="m-2">
                 Password
               </label>
               <input
@@ -104,6 +106,7 @@ function LoginPage() {
             </button>
            
           </form>
+        </div>
         </div>
       </div>
     </>

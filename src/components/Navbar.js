@@ -9,8 +9,8 @@ function Navbar() {
   const [showNav, setshowNav] = useState(false);
   // const [token, setToken] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
   const [authenticated, setAuthenticated] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -29,6 +29,10 @@ function Navbar() {
     }
   }, [location.pathname, setshowNav]);
 
+  const goToCart=()=>{
+    navigate('/protected-route/cart')
+  }
+
   function DecideBars() {
     return showNav ? (
       <i className="fa-solid fa-xmark"></i>
@@ -45,9 +49,9 @@ function Navbar() {
     navigate("/login-page");
   };
 
-  const openSignupPage = () => {
-    navigate("/signup-page");
-  };
+  // const openSignupPage = () => {
+  //   navigate("/signup-page");
+  // };
 
   const logout=()=>{
     signOut(auth)
@@ -119,7 +123,7 @@ function Navbar() {
       <div className="flex flex-row absolute right-10">
         {authenticated ? (
           <>
-            
+            <button onClick={goToCart} className="px-4 hover:bg-indigo-400 rounded-[100%]"><i className="fa-solid fa-cart-plus cursor-pointer"></i></button>
             <button
               onClick={logout}
               className="p-2 m-2 bg-indigo-950 text-white border-indigo-400 rounded-full hover:bg-indigo-900"
@@ -135,12 +139,12 @@ function Navbar() {
             >
               Login
             </button>
-            <button
+            {/* <button
               onClick={openSignupPage}
               className="p-2 m-2 bg-indigo-950 text-white border-indigo-400 rounded-full hover:bg-indigo-900"
             >
               Signup
-            </button>
+            </button> */}
           </>
         )}
         <div
